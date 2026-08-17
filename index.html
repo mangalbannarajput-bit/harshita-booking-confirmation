@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harshita Tour & Travels - Booking Confirmation</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#fff3d1,#ffd27a);
+  color:#35200f;
+  padding:15px;
+}
+
+.container{
+  max-width:520px;
+  margin:auto;
+}
+
+.card{
+  background:#fff;
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+
+.header{
+  text-align:center;
+  border-bottom:2px solid #f0c46a;
+  padding-bottom:18px;
+}
+
+.logo{
+  font-size:42px;
+}
+
+.brand{
+  font-size:25px;
+  font-weight:900;
+  color:#a52b00;
+}
+
+.subtitle{
+  color:#8b6200;
+  font-weight:bold;
+  margin-top:6px;
+}
+
+.booking-title{
+  text-align:center;
+  margin:22px 0 15px;
+  color:#a52b00;
+  font-size:21px;
+}
+
+.booking-id{
+  background:#fff5dd;
+  border-radius:12px;
+  padding:13px;
+  text-align:center;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.details{
+  border:1px solid #f0d49c;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px;
+  border-bottom:1px solid #f1dfbd;
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.label{
+  font-weight:bold;
+  color:#72512c;
+}
+
+.value{
+  text-align:right;
+  font-weight:bold;
+}
+
+.status{
+  color:#13853d;
+}
+
+.terms{
+  margin-top:20px;
+  background:#fff8e8;
+  padding:15px;
+  border-radius:15px;
+}
+
+.terms h3{
+  margin-top:0;
+  color:#a52b00;
+}
+
+.terms li{
+  margin-bottom:9px;
+  line-height:1.45;
+}
+
+.accept{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-top:15px;
+  font-weight:bold;
+  line-height:1.4;
+}
+
+.accept input{
+  width:20px;
+  height:20px;
+  margin-top:2px;
+}
+
+.confirm{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:16px;
+  margin-top:18px;
+  background:#159447;
+  color:white;
+  font-size:19px;
+  font-weight:900;
+}
+
+.confirm:disabled{
+  background:#aaa;
+}
+
+.success{
+  display:none;
+  margin-top:20px;
+  padding:20px;
+  text-align:center;
+  background:#eafff0;
+  border:2px solid #42b76a;
+  border-radius:18px;
+}
+
+.success h2{
+  color:#13853d;
+}
+
+.footer{
+  text-align:center;
+  margin-top:18px;
+  color:#765b45;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="card">
+
+<div class="header">
+  <div class="logo">🚍</div>
+  <div class="brand">HARSHITA TOUR & TRAVELS</div>
+  <div class="subtitle">आपकी यात्रा, हमारी जिम्मेदारी ❤️</div>
+</div>
+
+<div class="booking-title">
+  🎫 BOOKING CONFIRMATION
+</div>
+
+<div class="booking-id">
+  Booking ID: <span id="bookingId">HTT-2026-001</span>
+</div>
+
+<div class="details">
+
+<div class="row">
+<span class="label">👤 यात्री</span>
+<span class="value">[ग्राहक का नाम]</span>
+</div>
+
+<div class="row">
+<span class="label">📅 यात्रा दिनांक</span>
+<span class="value">[तारीख]</span>
+</div>
+
+<div class="row">
+<span class="label">📍 गंतव्य</span>
+<span class="value">[यात्रा स्थान]</span>
+</div>
+
+<div class="row">
+<span class="label">📍 Pickup Location</span>
+<span class="value">[Pickup स्थान]</span>
+</div>
+
+<div class="row">
+<span class="label">⏰ Reporting Time</span>
+<span class="value">[समय]</span>
+</div>
+
+<div class="row">
+<span class="label">🚘 Vehicle</span>
+<span class="value">[वाहन]</span>
+</div>
+
+<div class="row">
+<span class="label">👨‍✈️ Driver Name</span>
+<span class="value">[ड्राइवर नाम]</span>
+</div>
+
+<div class="row">
+<span class="label">📞 Driver Mobile</span>
+<span class="value">[ड्राइवर नंबर]</span>
+</div>
+
+<div class="row">
+<span class="label">💰 Total Fare</span>
+<span class="value">₹[कुल राशि]</span>
+</div>
+
+<div class="row">
+<span class="label">💵 Paid Amount</span>
+<span class="value">₹[जमा राशि]</span>
+</div>
+
+<div class="row">
+<span class="label">💳 Balance</span>
+<span class="value">₹[बाकी राशि]</span>
+</div>
+
+<div class="row">
+<span class="label">💳 Payment Status</span>
+<span class="value status">[PAID / PARTIAL / PENDING]</span>
+</div>
+
+</div>
+
+<div class="terms">
+
+<h3>📜 Terms & Conditions</h3>
+
+<ul>
+<li>Booking ग्राहक की सहमति के बाद ही Final माना जाएगा।</li>
+<li>यात्रा के समय Reporting Time का पालन करना आवश्यक है।</li>
+<li>Booking में दी गई जानकारी सही होना ग्राहक की जिम्मेदारी है।</li>
+<li>Advance/Payment की राशि Booking Details के अनुसार होगी।</li>
+<li>यात्रा में किसी भी बदलाव के लिए Harshita Tour & Travels से पहले संपर्क करें।</li>
+<li>यात्रा के दौरान वाहन एवं चालक की सुरक्षा संबंधी निर्देशों का पालन करना आवश्यक है।</li>
+<li>विशेष परिस्थितियों में यात्रा के समय/वाहन में उचित बदलाव किया जा सकता है।</li>
+</ul>
+
+<label class="accept">
+<input type="checkbox" id="accept">
+<span>मैंने Booking Details एवं Terms & Conditions पढ़कर स्वीकार कर ली हैं।</span>
+</label>
+
+<button class="confirm" id="confirmBtn" disabled>
+✅ CONFIRM BOOKING
+</button>
+
+</div>
+
+<div class="success" id="success">
+
+<div style="font-size:45px;">🎉</div>
+
+<h2>BOOKING CONFIRMED!</h2>
+
+<p>आपकी Booking सफलतापूर्वक Confirm हो गई है।</p>
+
+<p>
+<strong>Booking ID:</strong>
+<span id
