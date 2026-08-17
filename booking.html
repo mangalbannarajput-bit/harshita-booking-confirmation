@@ -316,4 +316,168 @@ Booking ID:
 
 <button class="confirm" id="confirmBtn" disabled>
 ✅ CONFIRM BOOKING
-</but
+</button>
+
+<button class="whatsapp" id="whatsappBtn">
+📲 WhatsApp पर Confirmation भेजें
+</button>
+
+</div>
+
+<div class="success" id="success">
+
+<div style="font-size:45px;">
+🎉
+</div>
+
+<h2>BOOKING CONFIRMED!</h2>
+
+<p>
+आपकी Booking सफलतापूर्वक Confirm हो गई है।
+</p>
+
+<p>
+<strong>Booking ID:</strong>
+<span id="successId"></span>
+</p>
+
+<p>
+अब नीचे दिए WhatsApp button से Confirmation भेजें।
+</p>
+
+</div>
+
+<div class="footer">
+🙏 धन्यवाद<br>
+<strong>HARSHITA TOUR & TRAVELS</strong>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+function getParam(name){
+return params.get(name) || "";
+}
+
+const data = {
+id:getParam("id"),
+customer:getParam("customer"),
+date:getParam("date"),
+destination:getParam("destination"),
+pickup:getParam("pickup"),
+reporting:getParam("reporting"),
+vehicle:getParam("vehicle"),
+driver:getParam("driver"),
+driverMobile:getParam("driverMobile"),
+total:getParam("total"),
+paid:getParam("paid"),
+payment:getParam("payment")
+};
+
+if(!data.id && !data.customer){
+
+document.getElementById("error").style.display="block";
+
+}else{
+
+document.getElementById("bookingId").textContent=data.id;
+document.getElementById("customer").textContent=data.customer;
+document.getElementById("date").textContent=data.date;
+document.getElementById("destination").textContent=data.destination;
+document.getElementById("pickup").textContent=data.pickup;
+document.getElementById("reporting").textContent=data.reporting;
+document.getElementById("vehicle").textContent=data.vehicle;
+document.getElementById("driver").textContent=data.driver;
+document.getElementById("driverMobile").textContent=data.driverMobile;
+
+document.getElementById("total").textContent=
+"₹"+(data.total || "0");
+
+document.getElementById("paid").textContent=
+"₹"+(data.paid || "0");
+
+let total=parseFloat(data.total)||0;
+let paid=parseFloat(data.paid)||0;
+let balance=total-paid;
+
+document.getElementById("balance").textContent=
+"₹"+balance;
+
+document.getElementById("payment").textContent=
+data.payment || "PENDING";
+
+}
+
+const accept=document.getElementById("accept");
+const confirmBtn=document.getElementById("confirmBtn");
+const whatsappBtn=document.getElementById("whatsappBtn");
+
+accept.addEventListener("change",function(){
+
+confirmBtn.disabled=!this.checked;
+
+});
+
+confirmBtn.addEventListener("click",function(){
+
+document.getElementById("success").style.display="block";
+
+document.getElementById("successId").textContent=data.id;
+
+whatsappBtn.style.display="block";
+
+confirmBtn.disabled=true;
+
+document.getElementById("success").scrollIntoView({
+behavior:"smooth"
+});
+
+});
+
+whatsappBtn.addEventListener("click",function(){
+
+const message=
+`🎫 BOOKING CONFIRMATION
+
+HARSHITA TOUR & TRAVELS
+
+Booking ID: ${data.id}
+ग्राहक: ${data.customer}
+
+यात्रा दिनांक: ${data.date}
+गंतव्य: ${data.destination}
+Pickup: ${data.pickup}
+Reporting Time: ${data.reporting}
+
+Vehicle: ${data.vehicle}
+Driver: ${data.driver}
+Driver Mobile: ${data.driverMobile}
+
+Total Fare: ₹${data.total || 0}
+Paid Amount: ₹${data.paid || 0}
+Balance: ₹${(parseFloat(data.total)||0)-(parseFloat(data.paid)||0)}
+
+Payment Status: ${data.payment || "PENDING"}
+
+✅ ग्राहक ने Booking Details और Terms & Conditions पढ़कर Booking Confirm की है।
+
+धन्यवाद 🙏
+HARSHITA TOUR & TRAVELS`;
+
+const whatsappURL=
+"https://wa.me/917970041341?text="+
+encodeURIComponent(message);
+
+window.open(whatsappURL,"_blank");
+
+});
+
+</script>
+
+</body>
+</html>
