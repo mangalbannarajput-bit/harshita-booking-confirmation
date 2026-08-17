@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Link Generator | Harshita Tour & Travels</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  padding:15px;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#fff3d1,#ffd27a);
+}
+
+.card{
+  max-width:520px;
+  margin:auto;
+  background:white;
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 10px 30px rgba(0,0,0,.18);
+}
+
+.header{text-align:center}
+
+.logo{font-size:45px}
+
+h1{
+  color:#a52b00;
+  font-size:25px;
+}
+
+.subtitle{
+  color:#8b6200;
+  font-weight:bold;
+}
+
+label{
+  display:block;
+  margin-top:13px;
+  font-weight:bold;
+  color:#5d4325;
+}
+
+input,select{
+  width:100%;
+  padding:13px;
+  margin-top:6px;
+  border:1px solid #d9bd8a;
+  border-radius:12px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:15px;
+  padding:15px;
+  margin-top:18px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.generate{
+  background:#159447;
+  color:white;
+}
+
+.copy{
+  background:#a52b00;
+  color:white;
+}
+
+.whatsapp{
+  background:#25D366;
+  color:white;
+}
+
+.result{
+  display:none;
+  margin-top:20px;
+  padding:15px;
+  background:#fff8e8;
+  border-radius:15px;
+}
+
+.link{
+  word-break:break-all;
+  background:white;
+  padding:12px;
+  border-radius:10px;
+  font-size:13px;
+}
+
+.note{
+  margin-top:15px;
+  font-size:13px;
+  color:#765b45;
+  line-height:1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="header">
+  <div class="logo">🚍</div>
+  <h1>HARSHITA TOUR & TRAVELS</h1>
+  <div class="subtitle">Booking Link Generator</div>
+</div>
+
+<label>Booking ID</label>
+<input id="bookingId" placeholder="HTT-2026-001">
+
+<label>ग्राहक का नाम</label>
+<input id="customer" placeholder="जैसे - महेश जी">
+
+<label>यात्रा दिनांक</label>
+<input id="date" placeholder="जैसे - 30 अगस्त 2026">
+
+<label>गंतव्य</label>
+<input id="destination" placeholder="जैसे - रामदेवरा">
+
+<label>Pickup Location</label>
+<input id="pickup" placeholder="जैसे - खजूरी चंद्रावत">
+
+<label>Reporting Time</label>
+<input id="reporting" placeholder="जैसे - सुबह 6:00 बजे">
+
+<label>Vehicle</label>
+<input id="vehicle" placeholder="जैसे - Ertiga / Eeco">
+
+<label>Driver Name</label>
+<input id="driver" placeholder="ड्राइवर का नाम">
+
+<label>Driver Mobile</label>
+<input id="driverMobile" placeholder="ड्राइवर का मोबाइल नंबर">
+
+<label>Total Fare</label>
+<input id="total" type="number" placeholder="3000">
+
+<label>Paid Amount</label>
+<input id="paid" type="number" placeholder="1000">
+
+<label>Payment Status</label>
+<select id="payment">
+  <option value="PAID">PAID</option>
+  <option value="PARTIAL">PARTIAL</option>
+  <option value="PENDING">PENDING</option>
+</select>
+
+<button class="generate" onclick="generateLink()">
+🔗 BOOKING LINK बनाएं
+</button>
+
+<div class="result" id="result">
+
+<h3>✅ Booking Link तैयार है</h3>
+
+<div class="link" id="generatedLink"></div>
+
+<button class="copy" onclick="copyLink()">
+📋 LINK COPY करें
+</button>
+
+<button class="whatsapp" onclick="shareLinkWhatsApp()">
+📲 ग्राहक को WhatsApp पर Link भेजें
+</button>
+
+</div>
+
+<div class="note">
+⚠️ Link बनाने के बाद ग्राहक इसे खोलकर अपनी Booking Details,
+Terms & Conditions पढ़कर Booking Confirm कर सकेगा।
+</div>
+
+</div>
+
+<script>
+
+let finalLink = "";
+
+function getValue(id){
+  return document.getElementById(id).value.trim();
+}
+
+function generateLink(){
+
+  const bookingId = getValue("bookingId");
+
+  if(!bookingId){
+    alert("कृपया Booking ID डालें");
+    return;
+  }
+
+  const data = {
+    id: bookingId,
+    customer: getValue("customer"),
+    date: getValue("date"),
+    destination: getValue("destination"),
+    pickup: getValue("pickup"),
+    reporting: getValue("reporting"),
+    vehicle: getValue("vehicle"),
+    driver: getValue("driver"),
+    driverMobile: getValue("driverMobile"),
+    total: getValue("total"),
+    paid: getValue("paid"),
+    payment: getValue("payment")
+  };
+
+  const params = new URLSearchParams(data);
+
+  const base = window.location.href
+    .split("booking-link-generator.html")[0];
+
+  finalLink = base + "booking.html?" + params.toString();
+
+  document.getElementById("generatedLink").textContent = finalLink;
+
+  document.getElementById("result").style.display = "block";
+}
+
+function copyLink(){
+
+  navigator.clipboard.writeText(finalLink);
+
+  alert("✅ Booking Link Copy हो गई");
+}
+
+function shareLinkWhatsApp(){
+
+  const customer = getValue("customer");
+
+  const message =
+`नमस्ते ${customer || "जी"} 🙏
+
+HARSHITA TOUR & TRAVELS की आपकी Booking Confirmation तैयार है।
+
+नीचे दिए Link पर जाकर अपनी पूरी Booking Details और Terms & Conditions जरूर पढ़ें:
+
+${finalLink}
+
+Details सही होने पर Booking Confirm करें।
+
+धन्यवाद ❤️
+HARSHITA TOUR & TRAVELS`;
+
+  window.open(
+    "https://wa.me/?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}
+
+</script>
+
+</body>
+</html>
